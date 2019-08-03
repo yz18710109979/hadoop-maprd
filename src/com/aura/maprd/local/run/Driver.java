@@ -19,6 +19,7 @@ import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 public class Driver {
 	//args 接受 控制台传参   参数1 agrs[0]  参数2  args[1]  多个参数使用空格隔开
 	public static void main(String[] args) throws IOException, ClassNotFoundException, InterruptedException {
+		System.setProperty("HADOOP_USER_NAME", "hdp");
 		//获取集群的配置文件
 		Configuration conf=new Configuration();
 		conf.set("fs.defaultFS", "hdfs://hdp01:9000");
@@ -58,7 +59,7 @@ public class Driver {
 		
 		//指定输出路径
 //		FileOutputFormat.setOutputPath(job, new Path(args[1]));
-		FileOutputFormat.setOutputPath(job, new Path("E:\\hadoop\\doc\\wc\\output"));
+		FileOutputFormat.setOutputPath(job, new Path("/output"));
 		//不会打印运行日志
 		//job.submit();
 		//参数 代表 是否打印日志

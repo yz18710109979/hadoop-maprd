@@ -1,4 +1,4 @@
-package com.aura.maprd.maptast;
+package com.aura.maprd.maptask;
 
 
 import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
