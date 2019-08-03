@@ -12,53 +12,53 @@ import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 
 
 /*
- * ��װmap reduce 
- * 
- * ��  map   reduce ��װһ��job��
+ * 组装map reduce
+ *
+ * 将  map   reduce 封装一个job中
  */
 public class Driver {
-	//args ���� ����̨����   ����1 agrs[0]  ����2  args[1]  �������ʹ�ÿո����
+	//args 接受 控制台传参   参数1 agrs[0]  参数2  args[1]  多个参数使用空格隔开
 	public static void main(String[] args) throws IOException, ClassNotFoundException, InterruptedException {
-		//��ȡ��Ⱥ�������ļ�
+		//获取集群的配置文件
 		Configuration conf=new Configuration();
-		//����job   ����һ��job����
+		//启动job   构建一个job对象
 		Job job=Job.getInstance(conf);
-		
-		//����job�ķ�װ  
-		//ָ��jar�����е� ����
+
+		//进行job的封装
+		//指定jar包运行的 主类
 		/*
-		 * ��ȡclass 
-		 * 1)������class
-		 * 2������getClass
+		 * 获取class
+		 * 1)类名。class
+		 * 2）对象。getClass
 		 * 3)Class.forName()
 		 */
 		job.setJarByClass(Driver.class);
-		
-		//ָ��map �� reduce��Ӧ����
+
+		//指定map 和 reduce对应的类
 		job.setMapperClass(WordCountMapper.class);
 		job.setReducerClass(WordCountReducer.class);
-		
-		//ָ��map�����  k v������
+
+		//指定map输出的  k v的类型
 		/*
-		 * ��ܶ�ȡ�ļ� -----�� mapper ----��reducer
-		 * ���͵��������ڣ�
-		 * 	����ʱ��Ч  ����ʱ�Զ�����
+		 * 框架读取文件 -----》 mapper ----》reducer
+		 * 泛型的作用周期：
+		 * 	编译时生效  运行时自动擦除
 		 */
 		job.setMapOutputKeyClass(Text.class);
 		job.setMapOutputValueClass(IntWritable.class);
-		
-		//ָ��reduce���������  ָ�����������
+
+		//指定reduce输出的类型  指定最终输出的
 		job.setOutputKeyClass(Text.class);
 		job.setOutputValueClass(IntWritable.class);
-		
-		//ָ������·��
+
+		//指定输入路径
 		FileInputFormat.addInputPath(job, new Path(args[0]));
-		
-		//ָ�����·��
+
+		//指定输出路径
 		FileOutputFormat.setOutputPath(job, new Path(args[1]));
-		//�����ӡ������־
+		//不会打印运行日志
 		//job.submit();
-		//���� ���� �Ƿ��ӡ��־
+		//参数 代表 是否打印日志
 		job.waitForCompletion(true);
 		
 	}
