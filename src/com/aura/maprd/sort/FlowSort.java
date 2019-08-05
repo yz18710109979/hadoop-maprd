@@ -131,7 +131,7 @@ public class FlowSort {
 		
 		
 		//指定reducetask的个数
-		job.setNumReduceTasks(3);
+//		job.setNumReduceTasks(1);
 		
 		
 		
@@ -140,7 +140,7 @@ public class FlowSort {
 		
 		//指定输出路径
 		FileSystem fs=FileSystem.get(conf);
-		Path out=new Path("E:\\hadoop\\doc\\flow\\flow_out\\flow_sort_out");
+		Path out=new Path("E:\\hadoop\\doc\\flow\\flow_sort_out");
 		if(fs.exists(out)){
 			fs.delete(out, true);
 		}
