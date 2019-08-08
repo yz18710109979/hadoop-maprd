@@ -52,10 +52,12 @@ public class Driver {
 		job.setOutputValueClass(IntWritable.class);
 
 		//指定输入路径
-		FileInputFormat.addInputPath(job, new Path(args[0]));
+		Path in = new Path("D:\\doc\\wc");
+		FileInputFormat.addInputPath(job, in);
 
 		//指定输出路径
-		FileOutputFormat.setOutputPath(job, new Path(args[1]));
+		Path out = new Path("D:\\\\doc\\\\wc_out001");
+		FileOutputFormat.setOutputPath(job, out);
 		//不会打印运行日志
 		//job.submit();
 		//参数 代表 是否打印日志
